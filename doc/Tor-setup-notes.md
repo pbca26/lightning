@@ -228,25 +228,54 @@ bind=127.0.0.1
 externalip=d4mc5ld3jkyo5or2.onion
 ```
 
-#### For future use only. Don't set the following now.
-
-Additional options for `chips.conf` you will be able to use when there'll be more hidden Chips services setup to help this network:
+### Additional options for `chips.conf`
+If you want to connect your Chips node only through tor completly and don't want any connections to be made over public network add the following
+But this will require you to add .onion seed nodes too. Otherwise you'll most probably have issues getting peers to connect to.
 
 ```shell
-# If you want to connect your Chips node only through tor completly
-# and don't want any connections to be made over public network add the following
-# But this will require you to add .onion seed nodes too.
-# Otherwise you'll most probably have issues getting peers to connect to.
 onlynet=onion
 
 #Add seed nodes
-seednode=syjmeab77as4hyhj.onion
+addnode=4l75z2ai3jyapzlm.onion
+addnode=xtwgiapr5tzmigjk.onion
+addnode=qtwjcqfyaq6db3yb.onion
+addnode=3ds2xm2yhccayswh.onion
+addnode=syjmeab77as4hyhj.onion
+addnode=dljbtak3s6ki675v.onion
+addnode=fnfrbsv3d3mia4u4.onion
+addnode=z3f3f4amdbmrrawz.onion
 
 #And/or add some nodes
-addnode=syjmeab77as4hyhj.onion
+seednode=4l75z2ai3jyapzlm.onion
+seednode=xtwgiapr5tzmigjk.onion
+seednode=qtwjcqfyaq6db3yb.onion
+seednode=3ds2xm2yhccayswh.onion
+seednode=syjmeab77as4hyhj.onion
+seednode=dljbtak3s6ki675v.onion
+seednode=fnfrbsv3d3mia4u4.onion
+seednode=z3f3f4amdbmrrawz.onion
 ```
 
 Once `chips.conf` is setup, restart your `chipsd` daemon.
+
+After editing your `chips.conf` will look like this:
+
+```shell
+server=1
+daemon=1
+txindex=1
+rpcuser=chipsuser
+rpcpassword=YOUR_RPC_PASSWORD
+rpcbind=127.0.0.1
+rpcallowip=127.0.0.1
+proxy=127.0.0.1:9050
+listen=1
+bind=127.0.0.1
+onlynet=onion
+externalip=d4mc5ld3jkyo5or2.onion
+addnode=syjmeab77as4hyhj.onion
+seednode=syjmeab77as4hyhj.onion
+```
 
 ### Verify Chips tor connection
 To verify if you are able are getting blocks from the network and your node is connected through tor, you can use the command `getnetworkinfo`:
