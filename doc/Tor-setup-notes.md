@@ -273,8 +273,22 @@ listen=1
 bind=127.0.0.1
 onlynet=onion
 externalip=d4mc5ld3jkyo5or2.onion
+addnode=4l75z2ai3jyapzlm.onion
+addnode=xtwgiapr5tzmigjk.onion
+addnode=qtwjcqfyaq6db3yb.onion
+addnode=3ds2xm2yhccayswh.onion
 addnode=syjmeab77as4hyhj.onion
+addnode=dljbtak3s6ki675v.onion
+addnode=fnfrbsv3d3mia4u4.onion
+addnode=z3f3f4amdbmrrawz.onion
+seednode=4l75z2ai3jyapzlm.onion
+seednode=xtwgiapr5tzmigjk.onion
+seednode=qtwjcqfyaq6db3yb.onion
+seednode=3ds2xm2yhccayswh.onion
 seednode=syjmeab77as4hyhj.onion
+seednode=dljbtak3s6ki675v.onion
+seednode=fnfrbsv3d3mia4u4.onion
+seednode=z3f3f4amdbmrrawz.onion
 ```
 
 ### Verify Chips tor connection
