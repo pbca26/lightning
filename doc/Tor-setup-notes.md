@@ -274,6 +274,7 @@ proxy=127.0.0.1:9050
 listen=1
 bind=127.0.0.1
 onlynet=onion
+discover=1
 externalip=d4mc5ld3jkyo5or2.onion
 addnode=4l75z2ai3jyapzlm.onion
 addnode=xtwgiapr5tzmigjk.onion
@@ -283,6 +284,7 @@ addnode=syjmeab77as4hyhj.onion
 addnode=dljbtak3s6ki675v.onion
 addnode=fnfrbsv3d3mia4u4.onion
 addnode=z3f3f4amdbmrrawz.onion
+addnode=f3qvjq5fojyikeqi.onion
 seednode=4l75z2ai3jyapzlm.onion
 seednode=xtwgiapr5tzmigjk.onion
 seednode=qtwjcqfyaq6db3yb.onion
@@ -291,6 +293,7 @@ seednode=syjmeab77as4hyhj.onion
 seednode=dljbtak3s6ki675v.onion
 seednode=fnfrbsv3d3mia4u4.onion
 seednode=z3f3f4amdbmrrawz.onion
+seednode=f3qvjq5fojyikeqi.onion
 ```
 
 ### Verify Chips tor connection
