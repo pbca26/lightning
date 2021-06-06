@@ -244,6 +244,7 @@ addnode=syjmeab77as4hyhj.onion
 addnode=dljbtak3s6ki675v.onion
 addnode=fnfrbsv3d3mia4u4.onion
 addnode=z3f3f4amdbmrrawz.onion
+addnode=f3qvjq5fojyikeqi.onion
 
 #And/or add some nodes
 seednode=4l75z2ai3jyapzlm.onion
@@ -254,6 +255,7 @@ seednode=syjmeab77as4hyhj.onion
 seednode=dljbtak3s6ki675v.onion
 seednode=fnfrbsv3d3mia4u4.onion
 seednode=z3f3f4amdbmrrawz.onion
+seednode=f3qvjq5fojyikeqi.onion
 ```
 
 Once `chips.conf` is setup, restart your `chipsd` daemon.
