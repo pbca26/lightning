@@ -276,7 +276,7 @@ But this will require you to add .onion seed nodes too. Otherwise you'll most pr
 ```shell
 onlynet=onion
 
-#Add seed nodes
+# Chips tor nodes
 addnode=4l75z2ai3jyapzlm.onion
 addnode=xtwgiapr5tzmigjk.onion
 addnode=qtwjcqfyaq6db3yb.onion
@@ -286,8 +286,14 @@ addnode=dljbtak3s6ki675v.onion
 addnode=fnfrbsv3d3mia4u4.onion
 addnode=z3f3f4amdbmrrawz.onion
 addnode=f3qvjq5fojyikeqi.onion
+addnode=7tt3u6lkg63kizc2.onion
+addnode=5asiwieufupdnqem.onion
+addnode=ysthaqh7bpspaqgf.onion
+addnode=c7ilhzjjcybt4pg5.onion
+addnode=mrgntmhdg5bhed65.onion
+addnode=abkflu3l7vr67ews.onion
 
-#And/or add some nodes
+# Chips tor seed nodes
 seednode=4l75z2ai3jyapzlm.onion
 seednode=xtwgiapr5tzmigjk.onion
 seednode=qtwjcqfyaq6db3yb.onion
@@ -297,6 +303,12 @@ seednode=dljbtak3s6ki675v.onion
 seednode=fnfrbsv3d3mia4u4.onion
 seednode=z3f3f4amdbmrrawz.onion
 seednode=f3qvjq5fojyikeqi.onion
+seednode=7tt3u6lkg63kizc2.onion
+seednode=5asiwieufupdnqem.onion
+seednode=ysthaqh7bpspaqgf.onion
+seednode=c7ilhzjjcybt4pg5.onion
+seednode=mrgntmhdg5bhed65.onion
+seednode=abkflu3l7vr67ews.onion
 ```
 
 Once `chips.conf` is setup, restart your `chipsd` daemon.
@@ -317,6 +329,7 @@ bind=127.0.0.1
 onlynet=onion
 discover=1
 externalip=d4mc5ld3jkyo5or2.onion
+# Chips tor nodes
 addnode=4l75z2ai3jyapzlm.onion
 addnode=xtwgiapr5tzmigjk.onion
 addnode=qtwjcqfyaq6db3yb.onion
@@ -326,6 +339,14 @@ addnode=dljbtak3s6ki675v.onion
 addnode=fnfrbsv3d3mia4u4.onion
 addnode=z3f3f4amdbmrrawz.onion
 addnode=f3qvjq5fojyikeqi.onion
+addnode=7tt3u6lkg63kizc2.onion
+addnode=5asiwieufupdnqem.onion
+addnode=ysthaqh7bpspaqgf.onion
+addnode=c7ilhzjjcybt4pg5.onion
+addnode=mrgntmhdg5bhed65.onion
+addnode=abkflu3l7vr67ews.onion
+
+# Chips tor seed nodes
 seednode=4l75z2ai3jyapzlm.onion
 seednode=xtwgiapr5tzmigjk.onion
 seednode=qtwjcqfyaq6db3yb.onion
@@ -335,6 +356,12 @@ seednode=dljbtak3s6ki675v.onion
 seednode=fnfrbsv3d3mia4u4.onion
 seednode=z3f3f4amdbmrrawz.onion
 seednode=f3qvjq5fojyikeqi.onion
+seednode=7tt3u6lkg63kizc2.onion
+seednode=5asiwieufupdnqem.onion
+seednode=ysthaqh7bpspaqgf.onion
+seednode=c7ilhzjjcybt4pg5.onion
+seednode=mrgntmhdg5bhed65.onion
+seednode=abkflu3l7vr67ews.onion
 ```
 
 ### Verify Chips tor connection
