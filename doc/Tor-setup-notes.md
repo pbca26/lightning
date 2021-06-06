@@ -50,10 +50,51 @@ sudo usermod -a -G debian-tor $(whoami)
 ```bash
 satinder@ubuntu:~$ groups
 satinder adm cdrom sudo dip plugdev lpadmin sambashare debian-tor
+```
 
+### Making sure Tor setup works
+
+```bash
 # Following command should just return nothing. If error, setup is not done correct
 satinder@ubuntu:~$ cat /run/tor/control.authcookie > /dev/null
 satinder@ubuntu:~$
+```
+
+If for some reason the above command does not return a blank result, your tor setup is not perfect.
+And it may cause issues with setting up and making lightning network daemon and chips daemon service over tor.
+
+Like, for me in my testing, [Proxmox Container](https://pve.proxmox.com/wiki/Linux_Container) was not reflecting the expected result of the above test command. The auth cookie file which should have been present at the expected location was not present.
+
+```bash
+satinder@ubuntu:~$ ls -lh /run/tor/control.authcookie
+ls: cannot access '/run/tor/control.authcookie': No such file or directory
+satinder@ubuntu:~$ sudo ls -lh /run/tor/control.authcookie
+ls: cannot access '/run/tor/control.authcookie': No such file or directory
+```
+
+And the following solution was tested and provided by a community member, documented in this [github issue](https://github.com/satindergrewal/lightning/issues/17).
+
+```bash
+sudo apt -y install apparmor-utils
+
+# Setting USE_AA_EXEC to no, if it's setup to yes (default value)
+if (grep 'USE_AA_EXEC="no"' /etc/default/tor > /dev/null 2>&1); then
+echo 'USE_AA_EXEC="no"' | sudo tee --append /etc/default/tor
+fi
+
+# Update tor app permissions
+sudo aa-complain system_tor
+
+# Restar tor servic and check if it's running fine
+sudo systemctl restart tor
+sudo systemctl status tor
+```
+
+After these changes the authcookie file shows fine, and we can proceed with our further setup
+
+```bash
+satinder@ubuntu:~$ sudo ls -lh /run/tor/control.authcookie
+-rw-r----- 1 debian-tor debian-tor 32 Jun  6 13:05 /run/tor/control.authcookie
 ```
 
 ### After editing the /etc/tor/torrc file looks like this
