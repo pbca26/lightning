@@ -12,7 +12,6 @@ from utils import (
 import os
 import pytest
 import subprocess
-import sys
 import unittest
 
 
@@ -441,27 +440,34 @@ def test_reserveinputs(node_factory, bitcoind, chainparams):
         l1.rpc.reserveinputs(psbt)
 
     assert all(o['reserved'] for o in l1.rpc.listfunds()['outputs'])
+    reserveheight = bitcoind.rpc.getblockchaininfo()['blocks'] + 72
+    assert all(o['reserved_to_block'] == reserveheight for o in l1.rpc.listfunds()['outputs'])
 
     # Unreserve as a batch.
     psbt = bitcoind.rpc.createpsbt([{'txid': out[0], 'vout': out[1]} for out in outputs], [])
     l1.rpc.unreserveinputs(psbt)
     assert not any(o['reserved'] for o in l1.rpc.listfunds()['outputs'])
+    assert not any('reserved_to_block' in o for o in l1.rpc.listfunds()['outputs'])
 
     # Reserve twice fails unless exclusive.
     l1.rpc.reserveinputs(psbt)
     with pytest.raises(RpcError, match=r"already reserved"):
         l1.rpc.reserveinputs(psbt)
     l1.rpc.reserveinputs(psbt, False)
+    assert all(o['reserved_to_block'] == reserveheight + 72 for o in l1.rpc.listfunds()['outputs'])
     l1.rpc.unreserveinputs(psbt)
     assert all(o['reserved'] for o in l1.rpc.listfunds()['outputs'])
+    assert all(o['reserved_to_block'] == reserveheight for o in l1.rpc.listfunds()['outputs'])
 
     # Stays reserved across restarts.
     l1.restart()
     assert all(o['reserved'] for o in l1.rpc.listfunds()['outputs'])
+    assert all(o['reserved_to_block'] == reserveheight for o in l1.rpc.listfunds()['outputs'])
 
     # Final unreserve works.
     l1.rpc.unreserveinputs(psbt)
     assert not any(o['reserved'] for o in l1.rpc.listfunds()['outputs'])
+    assert not any('reserved_to_block' in o for o in l1.rpc.listfunds()['outputs'])
 
 
 def test_fundpsbt(node_factory, bitcoind, chainparams):
@@ -985,7 +991,6 @@ def test_transaction_annotations(node_factory, bitcoind):
 
 
 @unittest.skipIf(VALGRIND, "It does not play well with prompt and key derivation.")
-@unittest.skipIf(not sys.stdout.isatty(), "Cannot")
 def test_hsm_secret_encryption(node_factory):
     l1 = node_factory.get_node(may_fail=True)  # May fail when started without key
     password = "reckful\n"
@@ -1336,3 +1341,31 @@ def test_repro_4258(node_factory, bitcoind):
     assert(len(tx['vin']) == 1)
     i0 = tx['vin'][0]
     assert([i0['txid'], i0['vout']] == [out['txid'], out['output']])
+
+
+@unittest.skipIf(TEST_NETWORK == 'liquid-regtest', "Uses regtest addresses")
+def test_withdraw_bech32m(node_factory, bitcoind):
+    l1 = node_factory.get_node()
+    l1.fundwallet(10000000)
+
+    # Based on BIP-320, but all changed to regtest.
+    addrs = ("BCRT1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KYGT080",
+             "bcrt1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qzf4jry",
+             "bcrt1pw508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7k0ylj56",
+             "BCRT1SW50QT2UWHA",
+             "bcrt1zw508d6qejxtdg4y5r3zarvaryv2wuatf",
+             "bcrt1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvseswlauz7",
+             "bcrt1pqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesyga46z",
+             "bcrt1p0xlxvlhemja6c4dqv22uapctqupfhlxm9h8z3k2e72q4k9hcz7vqc8gma6")
+
+    for addr in addrs:
+        l1.rpc.withdraw(addr, 10**3)
+        bitcoind.generate_block(1, wait_for_mempool=1)
+        print(l1.rpc.listfunds()['outputs'])
+        wait_for(lambda: [o for o in l1.rpc.listfunds()['outputs'] if o['status'] == 'confirmed' and not o['reserved']] != [])
+
+    # Test multiwithdraw
+    args = []
+    for addr in addrs:
+        args += [{addr: 10**3}]
+    l1.rpc.multiwithdraw(args)["txid"]

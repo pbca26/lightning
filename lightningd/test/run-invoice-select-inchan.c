@@ -59,10 +59,6 @@ const char *channel_change_state_reason_str(enum state_change reason UNNEEDED)
 /* Generated stub for channel_cleanup_commands */
 void channel_cleanup_commands(struct channel *channel UNNEEDED, const char *why UNNEEDED)
 { fprintf(stderr, "channel_cleanup_commands called!\n"); abort(); }
-/* Generated stub for channel_close_conn */
-void channel_close_conn(struct channel *channel UNNEEDED,
-			const char *why UNNEEDED)
-{ fprintf(stderr, "channel_close_conn called!\n"); abort(); }
 /* Generated stub for channel_fail_forget */
 void channel_fail_forget(struct channel *channel UNNEEDED, const char *fmt UNNEEDED, ...)
 { fprintf(stderr, "channel_fail_forget called!\n"); abort(); }
@@ -86,6 +82,10 @@ struct htlc_in *channel_has_htlc_in(struct channel *channel UNNEEDED)
 /* Generated stub for channel_has_htlc_out */
 struct htlc_out *channel_has_htlc_out(struct channel *channel UNNEEDED)
 { fprintf(stderr, "channel_has_htlc_out called!\n"); abort(); }
+/* Generated stub for channel_inflight_find */
+struct channel_inflight *channel_inflight_find(struct channel *channel UNNEEDED,
+					       const struct bitcoin_txid *txid UNNEEDED)
+{ fprintf(stderr, "channel_inflight_find called!\n"); abort(); }
 /* Generated stub for channel_internal_error */
 void channel_internal_error(struct channel *channel UNNEEDED, const char *fmt UNNEEDED, ...)
 { fprintf(stderr, "channel_internal_error called!\n"); abort(); }
@@ -96,6 +96,12 @@ u32 channel_last_funding_feerate(const struct channel *channel UNNEEDED)
 void channel_set_billboard(struct channel *channel UNNEEDED, bool perm UNNEEDED,
 			   const char *str TAKES UNNEEDED)
 { fprintf(stderr, "channel_set_billboard called!\n"); abort(); }
+/* Generated stub for channel_set_last_tx */
+void channel_set_last_tx(struct channel *channel UNNEEDED,
+			 struct bitcoin_tx *tx UNNEEDED,
+			 const struct bitcoin_signature *sig UNNEEDED,
+			 enum wallet_tx_type type UNNEEDED)
+{ fprintf(stderr, "channel_set_last_tx called!\n"); abort(); }
 /* Generated stub for channel_set_state */
 void channel_set_state(struct channel *channel UNNEEDED,
 		       enum channel_state old_state UNNEEDED,
@@ -115,6 +121,14 @@ bool channel_tell_depth(struct lightningd *ld UNNEEDED,
 				 const struct bitcoin_txid *txid UNNEEDED,
 				 u32 depth UNNEEDED)
 { fprintf(stderr, "channel_tell_depth called!\n"); abort(); }
+/* Generated stub for channel_unsaved_close_conn */
+void channel_unsaved_close_conn(struct channel *channel UNNEEDED, const char *why UNNEEDED)
+{ fprintf(stderr, "channel_unsaved_close_conn called!\n"); abort(); }
+/* Generated stub for channel_update_reserve */
+void channel_update_reserve(struct channel *channel UNNEEDED,
+			    struct channel_config *their_config UNNEEDED,
+			    struct amount_sat funding_total UNNEEDED)
+{ fprintf(stderr, "channel_update_reserve called!\n"); abort(); }
 /* Generated stub for command_fail */
 struct command_result *command_fail(struct command *cmd UNNEEDED, errcode_t code UNNEEDED,
 				    const char *fmt UNNEEDED, ...)
@@ -555,8 +569,7 @@ struct channel *peer_normal_channel(struct peer *peer UNNEEDED)
 /* Generated stub for peer_restart_dualopend */
 void peer_restart_dualopend(struct peer *peer UNNEEDED,
 			    struct per_peer_state *pps UNNEEDED,
-			    struct channel *channel UNNEEDED,
-			    const u8 *send_msg UNNEEDED)
+			    struct channel *channel UNNEEDED)
 { fprintf(stderr, "peer_restart_dualopend called!\n"); abort(); }
 /* Generated stub for peer_start_channeld */
 void peer_start_channeld(struct channel *channel UNNEEDED,
@@ -571,14 +584,11 @@ void peer_start_closingd(struct channel *channel UNNEEDED,
 			 const u8 *channel_reestablish UNNEEDED)
 { fprintf(stderr, "peer_start_closingd called!\n"); abort(); }
 /* Generated stub for peer_start_dualopend */
-void peer_start_dualopend(struct peer *peer UNNEEDED,
-			  struct per_peer_state *pps UNNEEDED,
-			  const u8 *send_msg UNNEEDED)
+void peer_start_dualopend(struct peer *peer UNNEEDED, struct per_peer_state *pps UNNEEDED)
 { fprintf(stderr, "peer_start_dualopend called!\n"); abort(); }
 /* Generated stub for peer_start_openingd */
 void peer_start_openingd(struct peer *peer UNNEEDED,
-			 struct per_peer_state *pps UNNEEDED,
-			 const u8 *msg UNNEEDED)
+			 struct per_peer_state *pps UNNEEDED)
 { fprintf(stderr, "peer_start_openingd called!\n"); abort(); }
 /* Generated stub for peer_unsaved_channel */
 struct channel *peer_unsaved_channel(struct peer *peer UNNEEDED)
@@ -599,6 +609,9 @@ void subd_req_(const tal_t *ctx UNNEEDED,
 	       void (*replycb)(struct subd * UNNEEDED, const u8 * UNNEEDED, const int * UNNEEDED, void *) UNNEEDED,
 	       void *replycb_data UNNEEDED)
 { fprintf(stderr, "subd_req_ called!\n"); abort(); }
+/* Generated stub for subd_send_fd */
+void subd_send_fd(struct subd *sd UNNEEDED, int fd UNNEEDED)
+{ fprintf(stderr, "subd_send_fd called!\n"); abort(); }
 /* Generated stub for subd_send_msg */
 void subd_send_msg(struct subd *sd UNNEEDED, const u8 *msg_out UNNEEDED)
 { fprintf(stderr, "subd_send_msg called!\n"); abort(); }
@@ -623,6 +636,9 @@ u8 *towire_channeld_specific_feerates(const tal_t *ctx UNNEEDED, u32 feerate_bas
 /* Generated stub for towire_connectd_connect_to_peer */
 u8 *towire_connectd_connect_to_peer(const tal_t *ctx UNNEEDED, const struct node_id *id UNNEEDED, u32 seconds_waited UNNEEDED, const struct wireaddr_internal *addrhint UNNEEDED)
 { fprintf(stderr, "towire_connectd_connect_to_peer called!\n"); abort(); }
+/* Generated stub for towire_connectd_peer_final_msg */
+u8 *towire_connectd_peer_final_msg(const tal_t *ctx UNNEEDED, const struct node_id *id UNNEEDED, const struct per_peer_state *pps UNNEEDED, const u8 *msg UNNEEDED)
+{ fprintf(stderr, "towire_connectd_peer_final_msg called!\n"); abort(); }
 /* Generated stub for towire_dualopend_send_shutdown */
 u8 *towire_dualopend_send_shutdown(const tal_t *ctx UNNEEDED, const u8 *shutdown_scriptpubkey UNNEEDED)
 { fprintf(stderr, "towire_dualopend_send_shutdown called!\n"); abort(); }
@@ -654,6 +670,10 @@ u8 *towire_warningfmt(const tal_t *ctx UNNEEDED,
 		      const struct channel_id *channel UNNEEDED,
 		      const char *fmt UNNEEDED, ...)
 { fprintf(stderr, "towire_warningfmt called!\n"); abort(); }
+/* Generated stub for valid_shutdown_scriptpubkey */
+bool valid_shutdown_scriptpubkey(const u8 *scriptpubkey UNNEEDED,
+				 bool anysegwit UNNEEDED)
+{ fprintf(stderr, "valid_shutdown_scriptpubkey called!\n"); abort(); }
 /* Generated stub for version */
 const char *version(void)
 { fprintf(stderr, "version called!\n"); abort(); }
