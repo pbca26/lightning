@@ -89,7 +89,7 @@ jobs:
          path: /home/pi/actions-runner-ln/_work/lightning/lightning/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
 
      - name: Cleanup after build
-       run: sleep 120 && rm -rf /home/pi/actions-runner/_work/lightning &
+       run: sleep 10 && rm -rf /home/pi/actions-runner-ln/_work/lightning &
 
 
 
