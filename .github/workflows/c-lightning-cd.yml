@@ -59,8 +59,8 @@ jobs:
      runs-on: [self-hosted, linux, ARM64, Raspberry-Pi]
   
      steps:
-     - name: Cleanup before build
-       run: rm -rf /home/pi/actions-runner-ln/_work/lightning/lightning/external/gheap /home/pi/actions-runner-ln/_work/lightning/lightning/external/jsmn /home/pi/actions-runner-ln/_work/lightning/lightning/external/libbacktrace /home/pi/actions-runner-ln/_work/lightning/lightning/external/libsodium /home/pi/actions-runner-ln/_work/lightning/lightning/external/libwally-core /home/pi/actions-runner-ln/_work/lightning/lightning/external/lnprototest /home/pi/actions-runner-ln/_work/lightning/lightning/c-lightning-linux-aarch64*
+    #  - name: Cleanup before build
+    #    run: rm -rf /home/pi/actions-runner-ln/_work/lightning/lightning/external/gheap /home/pi/actions-runner-ln/_work/lightning/lightning/external/jsmn /home/pi/actions-runner-ln/_work/lightning/lightning/external/libbacktrace /home/pi/actions-runner-ln/_work/lightning/lightning/external/libsodium /home/pi/actions-runner-ln/_work/lightning/lightning/external/libwally-core /home/pi/actions-runner-ln/_work/lightning/lightning/external/lnprototest /home/pi/actions-runner-ln/_work/lightning/lightning/c-lightning-linux-aarch64*
 
      - name: Checkout code
        uses: actions/checkout@v2
