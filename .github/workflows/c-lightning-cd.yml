@@ -197,9 +197,9 @@ jobs:
         - name: List Downloaded files
           run: |
             pwd && \
-            ls -lh /home/runner/work/bet/bet/artifacts/bet-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/bet-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz && \
-            ls -lh /home/runner/work/bet/bet/artifacts/bet-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/bet-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-            #ls -lh /home/runner/work/bet/bet/artifacts/bet-macos-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/bet-macos-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
+            ls -lh /home/runner/work/lightning/lightning/artifacts/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
+            # ls -lh /home/runner/work/lightning/lightning/artifacts/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
+            #ls -lh /home/runner/work/lightning/lightning/artifacts/c-lightning-macos-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-macos-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
 
         - name: Create Release
           id: create_release
