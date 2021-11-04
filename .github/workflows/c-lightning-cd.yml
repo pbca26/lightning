@@ -59,6 +59,9 @@ jobs:
      runs-on: [self-hosted, linux, ARM64, Raspberry-Pi]
   
      steps:
+     - name: Cleanup before build
+       run: rm -rf /home/pi/actions-runner-ln/_work/lightning
+
      - name: Checkout code
        uses: actions/checkout@v2
        with:
@@ -87,9 +90,6 @@ jobs:
        with:
          name: c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
          path: /home/pi/actions-runner-ln/_work/lightning/lightning/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-
-     - name: Cleanup after build
-       run: sleep 10 && rm -rf /home/pi/actions-runner-ln/_work/lightning &
 
 
 
