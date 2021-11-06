@@ -11,7 +11,8 @@ jobs:
 
   # Build Linux x86 64bit build
   linux-build-x86_64:
-    runs-on: ubuntu-18.04
+    # runs-on: ubuntu-18.04
+    runs-on: [self-hosted, linux, x64]
 
     steps:
     - name: Checkout code
@@ -32,8 +33,8 @@ jobs:
         
     - name: configure
       run: |
-        mkdir dist-x86_64 && \
-        ./configure --enable-static --prefix=$PWD/dist-x86_64
+        mkdir dist && \
+        ./configure --enable-static --prefix=$PWD/dist
       
     - name: make
       run: |
@@ -48,7 +49,7 @@ jobs:
     - name: List files
       run: |
         pwd && \
-        tar -czvf c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz dist-x86_64 && \
+        tar -czvf c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz dist && \
         ls -lh c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
 
     - name: Upload c-lightning-linux-x86_64 release files
@@ -56,6 +57,12 @@ jobs:
       with:
         name: c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
         path: /home/runner/work/lightning/lightning/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
+
+    - name: Clean Up after build uploaded
+      run: |
+        pwd && \
+        rm -rf dist && \
+        rm c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
 
 
   # # Build Linux ARM 64bit build
