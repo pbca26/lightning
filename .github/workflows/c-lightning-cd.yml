@@ -33,7 +33,7 @@ jobs:
         
     - name: configure
       run: |
-        rm c-lightning-linux-x86_64-*.tar.gz && \
+        rm c-lightning-linux-x86_64-*.tar.gz | true && \
         mkdir -p dist && \
         ./configure --enable-static --prefix=$PWD/dist
       
