@@ -57,7 +57,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-        path: /home/runner/work/lightning/lightning/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
+        path: /home/satinder/actions-runner-ln/_work/lightning/lightning/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
 
     - name: Clean Up after build uploaded
       run: |
