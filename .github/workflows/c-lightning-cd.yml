@@ -33,7 +33,7 @@ jobs:
     - name: configure
       run: |
         mkdir dist-x86_64 && \
-        ./configure --enable-static -prefix=$PWD/dist-x86_64
+        ./configure --enable-static --prefix=$PWD/dist-x86_64
       
     - name: make
       run: |
