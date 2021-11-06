@@ -33,7 +33,8 @@ jobs:
         
     - name: configure
       run: |
-        mkdir dist && \
+        rm c-lightning-linux-x86_64-*.tar.gz && \
+        mkdir -p dist && \
         ./configure --enable-static --prefix=$PWD/dist
       
     - name: make
@@ -61,8 +62,7 @@ jobs:
     - name: Clean Up after build uploaded
       run: |
         pwd && \
-        rm -rf dist && \
-        rm c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
+        rm -rf dist
 
 
   # # Build Linux ARM 64bit build
