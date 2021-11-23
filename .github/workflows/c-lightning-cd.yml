@@ -128,7 +128,7 @@ jobs:
           brew install automake
           brew install libtool
           brew install gmp
-          brew install sqlite
+          brew install sqlite@3.240
           brew install libsodium
           brew install gettext
           brew install wget
@@ -178,7 +178,8 @@ jobs:
   publish-release:
       name: Publishing CD releases
       runs-on: ubuntu-latest
-      needs: [linux-build-x86_64, macos-build-x86_64, linux-build-arm64]
+      needs: [linux-build-x86_64]
+      # needs: [linux-build-x86_64, macos-build-x86_64, linux-build-arm64]
       # needs: [linux-build-x86_64, linux-build-arm64]
       
       steps:
@@ -216,9 +217,7 @@ jobs:
         - name: List Downloaded files
           run: |
             pwd && \
-            ls -lh /home/runner/work/lightning/lightning/artifacts/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz && \
             ls -lh /home/runner/work/lightning/lightning/artifacts/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-            ls -lh /home/runner/work/lightning/lightning/artifacts/c-lightning-macos-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-macos-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
 
         - name: Create Release
           id: create_release
@@ -235,28 +234,6 @@ jobs:
               - Version tag: ${{ steps.extract_git_tag.outputs.gittag }}
             draft: false
             prerelease: true
-        
-        - name: Upload Linux Release Asset
-          id: upload-linux-release-asset 
-          uses: actions/upload-release-asset@latest
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-            asset_path: /home/runner/work/lightning/lightning/artifacts/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-            asset_name: c-lightning-linux-x86_64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-            asset_content_type: application/gzip
-        
-        - name: Upload Linux ARM64 Release Asset
-          id: upload-linux-arm64-release-asset 
-          uses: actions/upload-release-asset@latest
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-            asset_path: /home/runner/work/lightning/lightning/artifacts/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz/c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-            asset_name: c-lightning-linux-aarch64-${{ steps.extract_git_tag.outputs.gittag }}.tar.gz
-            asset_content_type: application/gzip
           
         - name: Upload MacOS Release Asset
           id: upload-macos-release-asset 
