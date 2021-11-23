@@ -111,7 +111,7 @@ jobs:
 
   # Build MacOS 64bit build
   macos-build-x86_64:
-    runs-on: macos-latest
+    runs-on: macos-10.14
 
     steps:
     - name: Checkout code
